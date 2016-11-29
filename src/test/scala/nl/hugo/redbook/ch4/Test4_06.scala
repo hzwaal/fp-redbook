@@ -1,8 +1,8 @@
 package nl.hugo.redbook.ch4
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.{ Matchers, WordSpec }
 
-import scala.{Either => _, Left => _, Option => _, Right => _}
+import scala.{ Either => _, Left => _, Option => _, Right => _ }
 
 class Test4_06 extends WordSpec with Matchers {
   "map" should {
