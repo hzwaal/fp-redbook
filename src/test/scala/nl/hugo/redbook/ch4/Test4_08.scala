@@ -1,6 +1,6 @@
 package nl.hugo.redbook.ch4
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.{ Matchers, WordSpec }
 
 class Test4_08 extends WordSpec with Matchers {
 

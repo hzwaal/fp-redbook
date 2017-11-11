@@ -20,5 +20,9 @@ class Test2_1 extends WordSpec with Matchers {
         fib(i) + fib(i + 1) should be(fib(i + 2))
       }
     }
+
+    "use tail-recursive implementation" in {
+      fib(10000) should be(1242044891)
+    }
   }
 }
