@@ -39,7 +39,7 @@ trait Applicative[F[_]] extends Functor[F] {
     fc: F[C]
   )(f: (A, B, C) => D): F[D] = ???
 
-  // Exercise 12.04
+  // Exercise 12.03
   def map4[A, B, C, D, E](
     fa: F[A],
     fb: F[B],
