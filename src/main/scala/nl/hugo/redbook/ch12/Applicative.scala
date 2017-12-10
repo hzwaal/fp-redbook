@@ -26,6 +26,9 @@ trait Applicative[F[_]] extends Functor[F] {
   // Exercise 12.01
   def traverse[A, B](as: List[A])(f: A => F[B]): F[List[B]] = ???
 
+  // Exersice 12.01
+  def product[A,B](fa: F[A], fb: F[B]): F[(A,B)] = ???
+
   // Exercise 12.01
   def replicateM[A](n: Int, fa: F[A]): F[List[A]] = ???
 
