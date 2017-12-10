@@ -9,8 +9,10 @@ import scala.language.{ higherKinds, implicitConversions }
 
 trait Applicative[F[_]] extends Functor[F] {
 
+  // Exercise 12.02
   def map2[A, B, C](fa: F[A], fb: F[B])(f: (A, B) => C): F[C] = ???
 
+  // Exercise 12.02
   def apply[A, B](fab: F[A => B])(fa: F[A]): F[B] = ???
 
   def unit[A](a: => A): F[A]
@@ -18,18 +20,39 @@ trait Applicative[F[_]] extends Functor[F] {
   def map[A, B](fa: F[A])(f: A => B): F[B] =
     apply(unit(f))(fa)
 
+  // Exercise 12.01
   def sequence[A](fas: List[F[A]]): F[List[A]] = ???
 
+  // Exercise 12.01
   def traverse[A, B](as: List[A])(f: A => F[B]): F[List[B]] = ???
 
+  // Exercise 12.01
   def replicateM[A](n: Int, fa: F[A]): F[List[A]] = ???
+
+  // Exercise 12.03
+  def map3[A, B, C, D](
+    fa: F[A],
+    fb: F[B],
+    fc: F[C]
+  )(f: (A, B, C) => D): F[D] = ???
+
+  // Exercise 12.04
+  def map4[A, B, C, D, E](
+    fa: F[A],
+    fb: F[B],
+    fc: F[C],
+    fd: F[D]
+  )(f: (A, B, C, D) => E): F[E] = ???
 
   def factor[A, B](fa: F[A], fb: F[B]): F[(A, B)] = ???
 
+  // Exercise 12.08
   def product[G[_]](G: Applicative[G]): Applicative[({ type f[x] = (F[x], G[x]) })#f] = ???
 
+  // Exercise 12.09
   def compose[G[_]](G: Applicative[G]): Applicative[({ type f[x] = F[G[x]] })#f] = ???
 
+  // Exercise 12.12
   def sequenceMap[K, V](ofa: Map[K, F[V]]): F[Map[K, V]] = ???
 }
 
@@ -48,6 +71,7 @@ trait Monad[F[_]] extends Applicative[F] {
 }
 
 object Monad {
+  // Exercise 12.05
   def eitherMonad[E]: Monad[({ type f[x] = Either[E, x] })#f] = ???
 
   def stateMonad[S] = new Monad[({ type f[x] = State[S, x] })#f] {
@@ -56,6 +80,7 @@ object Monad {
       st flatMap f
   }
 
+  // Exercise 12.20
   def composeM[F[_], N[_]](implicit F: Monad[F], N: Monad[N], T: Traverse[N]): Monad[({ type f[x] = F[N[x]] })#f] = ???
 }
 
@@ -79,6 +104,7 @@ object Applicative {
       a zip b map f.tupled
   }
 
+  // Exercise 12.06
   def validationApplicative[E]: Applicative[({ type f[x] = Validation[E, x] })#f] = ???
 
   type Const[A, B] = A
@@ -96,6 +122,7 @@ trait Traverse[F[_]] extends Functor[F] with Foldable[F] {
   def sequence[G[_]: Applicative, A](fma: F[G[A]]): G[F[A]] =
     traverse(fma)(ma => ma)
 
+  // Exercise 12.14
   def map[A, B](fa: F[A])(f: A => B): F[B] = ???
 
   import Applicative._
@@ -121,20 +148,27 @@ trait Traverse[F[_]] extends Functor[F] with Foldable[F] {
   def zipWithIndex[A](fa: F[A]): F[(A, Int)] =
     mapAccum(fa, 0)((a, s) => ((a, s), s + 1))._1
 
+  // Exercise 12.16
   def reverse[A](fa: F[A]): F[A] = ???
 
+  // Exercise 12.17
   override def foldLeft[A, B](fa: F[A])(z: B)(f: (B, A) => B): B = ???
 
+  // Exercise 12.18
   def fuse[G[_], H[_], A, B](fa: F[A])(f: A => G[B], g: A => H[B])(implicit G: Applicative[G], H: Applicative[H]): (G[F[B]], H[F[B]]) = ???
 
+  // Exericse 12.19
   def compose[G[_]](implicit G: Traverse[G]): Traverse[({ type f[x] = F[G[x]] })#f] = ???
 }
 
 object Traverse {
+  // Exercise 12.13
   val listTraverse = ???
 
+  // Exercise 12.13
   val optionTraverse = ???
 
+  // Exercise 12.13
   val treeTraverse = ???
 }
 
