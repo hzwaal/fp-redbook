@@ -1,8 +1,8 @@
 package nl.hugo.redbook.ch4
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.{ Matchers, WordSpec }
 
-import scala.{Either => _, Option => _, Some => _}
+import scala.{ Either => _, Option => _, Some => _ }
 
 class Test4_01 extends WordSpec with Matchers {
 
@@ -66,7 +66,6 @@ class Test4_01 extends WordSpec with Matchers {
     "return Some for Some.filter(true)" in {
       Some(1).filter(_ => true) should be(Some(1))
     }
-
 
     "return None for Some.filter(false)" in {
       Some(1).filter(_ => false) should be(None)

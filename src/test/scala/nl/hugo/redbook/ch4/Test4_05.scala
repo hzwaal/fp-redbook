@@ -1,8 +1,8 @@
 package nl.hugo.redbook.ch4
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.{ Matchers, WordSpec }
 
-import scala.{Either => _, Option => _, Some => _}
+import scala.{ Either => _, Option => _, Some => _ }
 
 class Test4_05 extends WordSpec with Matchers {
   "traverse" should {
@@ -14,7 +14,6 @@ class Test4_05 extends WordSpec with Matchers {
       Option.traverse(List(1, 2, 3, 4))(i => if (i == 2) None else Some(i)) should be(None)
     }
   }
-
 
   "sequence_via_traverse" should {
     "transform a List(Some) into Some(List)" in {

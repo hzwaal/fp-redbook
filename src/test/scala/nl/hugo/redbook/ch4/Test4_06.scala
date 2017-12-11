@@ -1,8 +1,8 @@
 package nl.hugo.redbook.ch4
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.{ Matchers, WordSpec }
 
-import scala.{Either => _, Left => _, Option => _, Right => _}
+import scala.{ Either => _, Left => _, Option => _, Right => _ }
 
 class Test4_06 extends WordSpec with Matchers {
   "map" should {
@@ -28,8 +28,8 @@ class Test4_06 extends WordSpec with Matchers {
       Right(1).flatMap(_ => Right(2)) should be(Right(2))
     }
 
-    "return Right when applied to Left" in {
-      Left(1).flatMap(_ => Right(2)) should be(Right(2))
+    "return Right when applied to Right" in {
+      Right(1).flatMap(_ => Right(2)) should be(Right(2))
     }
   }
 
